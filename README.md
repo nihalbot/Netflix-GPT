@@ -9,6 +9,9 @@
     - useRef Hook
     - Firebase Setup
     - Deploying App to Production
+    - Create Redux Store
+    - Implemented Sign Out
+    - Improve Routing
 # Features
     - Header
     - Main Movie

@@ -1,12 +1,13 @@
 export const cheekValidEmail = (email)=>{
-    console.log(email.length);
   const isEmailValid = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/.test(
     email
   );
 
   if (email.length == 0) return "Please enter a valid email or phone number.";
   if(!isEmailValid) return "Email is not valid";
- 
+  
+  return null;
+
 }
 
 export const cheekValidPassword = (password)=>{

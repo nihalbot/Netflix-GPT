@@ -1,6 +1,22 @@
-const Header = ()=> {
-    return (
-      <div className=" absolute w-full p-8 z-10 ">
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+const Header = () => {
+  const navigate = useNavigate();
+  const user = useSelector((store)=> store.user);
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/");
+      })
+      .catch(() => {
+        navigate("/error");
+      });
+  };
+  return (
+    <div className=" absolute w-full p-8 z-10 inset-0 bg-gradient-to-t from-transparent to-black from-70% flex justify-between h-40">
+      <div>
         <svg
           viewBox="0 0 111 30"
           version="1.1"
@@ -15,6 +31,15 @@ const Header = ()=> {
           </g>
         </svg>
       </div>
-    );
-}
+      <div>
+        {user && (<button
+          className="px-3 py-2 bg-red-600 text-white rounded-md cursor-pointer"
+          onClick={handleSignOut}
+        >
+          Sign Out
+        </button>)}
+      </div>
+    </div>
+  );
+};
 export default Header;
