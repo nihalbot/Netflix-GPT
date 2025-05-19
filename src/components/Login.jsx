@@ -1,10 +1,16 @@
 import { useState } from "react";
 import Header from "./Header";
-import { cheekValidEmail, cheekValidPassword} from "../utils/validate";
+import {
+  cheekValidEmail,
+  cheekValidPassword,
+  cheekValidFullName,
+} from "../utils/validate";
 const Login = () => {
   const [signup, setSignup] = useState(false);
   const [emailvalid, setEmailValid] = useState(null);
   const [passwordvalid, setPasswordValid] = useState(null);
+  const [nameValid, setNameValid] = useState(null);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullname, setFullname] = useState("");
@@ -24,6 +30,8 @@ const Login = () => {
   const handleFullname = (e) => {
     const name = e.target.value;
     setFullname(name);
+    const response = cheekValidFullName(fullname);
+    setNameValid(response);
   };
   const handleButtonClick = () => {
     //  const reponse =  cheekValidData(email.current.value, password.current.value);
@@ -51,15 +59,21 @@ const Login = () => {
             {signup ? "Signup" : "Sign In"}
           </h2>
           {signup && (
-              <input
-                className="mt-5 w-full border border-[#C1C1C1] focus:outline focus:outline-blue-500 rounded-md py-3 px-2"
-                type="text"
-                placeholder="Your Name"
-                value={fullname}
-                onChange={handleFullname}
-              />
-             
-            ) }
+            <input
+              className="mt-5 w-full border border-[#C1C1C1] focus:outline focus:outline-blue-500 rounded-md py-3 px-2"
+              type="text"
+              placeholder="Your Name"
+              value={fullname}
+              onChange={handleFullname}
+            />
+          )}
+          <p
+            className={`text-red-500 font-bold ${
+              !nameValid ? "mt-0" : "mt-5"
+            } text-md`}
+          >
+            {nameValid}
+          </p>
           <input
             //  ref={email}
             className="mt-5 w-full border border-[#C1C1C1] focus:outline focus:outline-blue-500 rounded-md py-3 px-2"
@@ -68,7 +82,13 @@ const Login = () => {
             value={email}
             onChange={handleEmail}
           />
-          <p className=" text-red-500 font-bold mt-4 text-md">{emailvalid}</p>
+          <p
+            className={`text-red-500 font-bold ${
+              !emailvalid ? "mt-0" : "mt-5"
+            } text-md`}
+          >
+            {emailvalid}
+          </p>
           <input
             // ref={password}
             className="w-full py-3 px-2 border border-[#C1C1C1] rounded-md mt-5"
@@ -77,7 +97,11 @@ const Login = () => {
             value={password}
             onChange={handlePassword}
           />
-          <p className=" text-red-500 font-bold mt-4 text-md">
+          <p
+            className={` text-red-500 font-bold ${
+              !passwordvalid ? "mt-0" : "mt4"
+            } text-md`}
+          >
             {passwordvalid}
           </p>
           <button

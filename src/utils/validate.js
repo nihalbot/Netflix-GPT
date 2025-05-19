@@ -20,8 +20,7 @@ export const cheekValidPassword = (password)=>{
 }
 
 export const cheekValidFullName = (name) => {
-  const fullName =
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(name);
+  const fullName = /^[A-Z][a-z]+(?: [A-Z][a-z]+)+$/.test(name);
   if (fullName.length == 0)
     return "Enter Name";
   if (!fullName) return "Enter Full Name";
